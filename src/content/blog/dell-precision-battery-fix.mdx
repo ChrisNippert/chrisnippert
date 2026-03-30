@@ -1,0 +1,35 @@
+---
+title: Attempting to Fix the Battery on a Dell Precision 7550
+date: "2026-03-30"
+summary: The challenges and steps involved in attempting to fix a peculiar battery issue on a Dell Precision 7550 laptop.
+tags: [windows, repair, dell, precision, battery]
+draft: false
+---
+
+Just the other day, a replacement battery came in for my friend's Dell Precision 7550 laptop.
+Seemingly, the original battery had been acting up as when unplugged, the machine would immediately and uncleanly shut down.
+I'm talking screen flashes with pink and/or green for a couple milliseconds and then black. It was dead, no lights, nothing.
+
+We opened it up from the bottom and popped the battery out with little to no struggle, cleaned the connectors with isopropyl alcohol, and slotted the new one in.
+We screwed the back plate on, flipped it over, and gave the power button a good firm press.
+Nothing happened, just like the last battery, but we weren't too surprised since it could be that the new battery came completely discharged.
+We plugged in the laptop and powered it on with no issues. The battery read 60% and was charging, so we got a little more skeptical that the battery itself was the issue.
+
+So obviously we took the next step and unplugged the laptop to see if it would shut down like before. It died immediately again.
+We plugged it back in and it powered on again; the battery had the gaul to read 61% like it was doing its job of being a battery.
+We figured that we would check the logs, and nothing out of the ordinary. We ran `powercfg /batteryreport` and the battery report looked healthy with some logs about being replaced and such.
+This was odd so we booted into BIOS to see for any logs or settings that could be causing this, but nothing was out of the ordinary there either.
+
+We read that if we held the power button for 30 seconds, it would do a hard reset and could potentially fix the issue, but pressing the power button when unplugged didn't turn it on.
+We plugged it in and turned it on again and then pulled the plug, and this time it was different. The screen froze and the fans turned off, but the screen remained on for about 30 seconds.
+This told us that the battery was actually supplying power to the machine to some extent, but obviously not correctly.
+
+At this point there were a couple options we had in mind:
+The BIOS could be outdated,
+the Battery Management System (BMS) was messed up or broken,
+or some internal connector was damaged and causing the battery to not actually be able to power the machine, or at the very least not be able to supply enough power to keep the machine on or turn it on from being off.
+We found out that the BMS is actually part of the battery and so that wouldn't be the issue, especially since it was reporting battery percent and charging.
+We proceeded to go and get the newest BIOS recovery file from Dell's website and repair the BIOS, but despite the BIOS being horribly out of date before, it didn't fix the issue.
+This left only the unfortunate possibility of some internal connector being damaged.
+
+At this point, we were pretty much out of options and just had to accept that something was wrong with the machine that we couldn't fix simply, and it's probably another hardware issue that would require a new motherboard or replacing some connectors that were faulty, but at this point it will serve as an effective desktop.
