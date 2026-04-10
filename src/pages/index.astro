@@ -1,10 +1,35 @@
 ---
 import Base from "@/layouts/Base.astro";
+
+const liveSites = [
+  {
+    title: "Tachyonic",
+    href: "https://tachyonic.chrisnippert.com/",
+    summary: "A shared url-based application for collaborative work.",
+  },
+  {
+    title: "Relay",
+    href: "https://relay.chrisnippert.com/",
+    summary: "A chat app Specification including a server written in GO with a frontend built with React, Node.js, and WebSockets, featuring real-time messaging, voice and video channels, and End to End Encryption (E2EE).",
+  }
+];
 ---
 
-<Base title="ChrisNippert" description="CS • Cyber • AI/ML • Music">
-    <section class="space-y-6">
-        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight">ChrisNippert</h1>
+<Base title="ChrisNippert" description="CS · AI/ML · Music">
+    <section class="space-y-8">
+        <div class="space-y-2">
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-text via-accent-soft to-accent bg-clip-text text-transparent">
+                ChrisNippert
+            </h1>
+            <p class="text-accent-soft text-sm font-medium tracking-wide">CS · AI/ML · Music</p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+            {["Julia", "Python", "Java", "C", "Go", "React", "Astro"].map(tag => (
+                <span class="rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs text-accent-soft">{tag}</span>
+            ))}
+        </div>
+
         <div class="text-text-muted max-w-prose space-y-4 text-sm sm:text-base leading-relaxed">
             <p>
                 I'm a Graduate student at UNH studying Computer Science with interests in AI, ML, and NLP.
@@ -25,12 +50,42 @@ import Base from "@/layouts/Base.astro";
                 I have a blog with some thoughts and ideas about various topics.
             </p>
         </div>
-        <div class="mt-8">
+
+        <div class="flex flex-wrap gap-3">
             <a
                 href="/blog"
-                class="inline-block rounded-xl border border-border px-4 py-2 hover:border-white/20 transition-colors duration-200 text-sm sm:text-base"
-                >Read the blog →</a
-            >
+                class="inline-block rounded-xl border border-border bg-bg-card px-4 py-2 hover:border-accent/40 hover:text-accent-soft transition-colors duration-200 text-sm sm:text-base"
+            >Read the blog →</a>
+            <a
+                href="/programming"
+                class="inline-block rounded-xl border border-border bg-bg-card px-4 py-2 hover:border-accent/40 hover:text-accent-soft transition-colors duration-200 text-sm sm:text-base"
+            >View projects →</a>
+            <a
+                href="/music"
+                class="inline-block rounded-xl border border-border bg-bg-card px-4 py-2 hover:border-accent/40 hover:text-accent-soft transition-colors duration-200 text-sm sm:text-base"
+            >Listen →</a>
+        </div>
+
+        <hr class="border-border" />
+
+        <div class="space-y-2">
+            <h2 class="text-xs font-semibold uppercase tracking-widest text-text-muted">Live Sites</h2>
+            <ul class="flex flex-wrap gap-3">
+                {liveSites.map(s => (
+                    <li>
+                        <a
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="group flex items-center gap-2 rounded-xl border border-border bg-bg-card px-3 py-2 text-sm hover:border-accent/40 transition-colors"
+                        >
+                            <span class="h-1.5 w-1.5 rounded-full bg-green-400 shrink-0" aria-hidden="true"></span>
+                            <span class="font-medium group-hover:text-accent-soft transition-colors">{s.title}</span>
+                            <span class="text-text-muted text-xs hidden sm:inline">— {s.summary}</span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
         </div>
     </section>
 </Base>
