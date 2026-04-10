@@ -1,0 +1,27 @@
+---
+title: The Painful Experience Some First-Time Linux Users Go Through 
+date: "2026-04-5"
+summary: abcde
+tags: [linux, laptop]
+draft: true
+---
+
+Recently, my non-linux friend desired a shittop, or a cheap laptop just to do some basic coding or web browsing.
+They weren't looking for anything powerful so I recommended a thinkpad like I had recently got for my own little portable machine, but they mentioned they had their old HP Pavilion 15.
+They got it out and we cleared the dusty guy off, plugged it in, and turned it on. It booted and didn't know the password, so we booted it with ubuntu and moved some of their files to another drive and got it ready to get linuxed.
+We decided to go with Linux Mint since many places recommend it for beginners and it has cinnamon which is a pretty nice and windows-like desktop environment.
+We downloaded the iso, made a bootable usb (almost wiping the wrong drive with `dd`), turned off secure boot in the BIOS, and got it booting into the live environment.
+
+The live environment was fine and we started the install process, but a couple steps in we ran into issue number one: RST, or Intel® Rapid Storage Technology.
+This is a technology that allows for faster storage performance and better power management with Intel Optane Memory, which I think just uses some PCIe drive as a cache for the main storage drive, but Linux Mint can't install with this enabled.
+So we went into BIOS and looked around for any settings regarding RST, but the only area that we could find it didn't show as anything editable, so I took a look online.
+It seemed the only solution that we could find to do this was on a reddit post saying to take out the PCIe optane drive, which we did not feel like doing, so we went to instead look for another distro.
+
+Since Linux Mint was based on Ubuntu, I made the assumption that Ubuntu would still have the same RST issue, so I chose fedora cinnamon for the stability and the fact that it had a cinnamon spin. We got it downloaded, written to a usb, and gave it a shot, and it worked! We got it installed and everything was working as Fedora.
+
+My friend was having some fun with the themes and customization that Cinnamon offers, but then came the time to install some of the programs my friend uses, namely Discord, Spotify, Chrome, and VS Code. They also wanted a GUI for the package manager, so I looked up what was available and it turns out Gnome-Software would probably work. We went to `dnf` to install it, and it turned out that it was already installed -- weird --, so we opened it up. We searched for any of the apps and literally none of them showed up. 
+
+
+
+Eventually just removed the optane drive and installed Linux Mint.
+
