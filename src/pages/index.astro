@@ -1,5 +1,22 @@
 ---
 import Base from "@/layouts/Base.astro";
+import { projects } from "@/data/projects";
+
+const featuredSlugs = ["spbfs", "nearest-neighbor-bucket-map", "open-trove"];
+const featuredProjects = featuredSlugs
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter((project): project is NonNullable<typeof project> => Boolean(project));
+
+const skills = [
+    "Backend Systems",
+    "AI / ML",
+    "LLM Tuning",
+    "Multithreading",
+    "Complexity Analysis",
+    "Linux",
+    "Cybersecurity",
+    "AI-Assisted Development",
+];
 
 const liveSites = [
   {
@@ -15,61 +32,107 @@ const liveSites = [
 ];
 ---
 
-<Base title="ChrisNippert" description="CS · AI/ML · Music">
-    <section class="space-y-8">
-        <div class="space-y-2">
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight bg-gradient-to-r from-text via-accent-soft to-accent bg-clip-text text-transparent">
-                ChrisNippert
-            </h1>
-            <p class="text-accent-soft text-sm font-medium tracking-wide">CS · AI/ML · Music</p>
-        </div>
+<Base title="ChrisNippert" description="Backend and systems-focused computer science graduate student building fast, optimized software.">
+    <section class="space-y-14 sm:space-y-18">
+        <header class="max-w-3xl space-y-5">
+            <div class="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-xs font-medium tracking-wide text-accent-soft">
+                <span class="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_theme(colors.accent.DEFAULT)]" aria-hidden="true"></span>
+                AVAILABLE FOR COLLABORATION
+            </div>
+            <div class="space-y-3">
+                <p class="text-sm font-medium uppercase tracking-[0.2em] text-text-muted">Chris Nippert · Computer Science</p>
+                <h1 class="text-3xl sm:text-5xl font-bold leading-tight bg-gradient-to-r from-text via-accent-soft to-accent bg-clip-text text-transparent">
+                    Building fast, optimized code<span class="terminal-cursor" aria-hidden="true">_</span>
+                </h1>
+                <p class="max-w-2xl text-base leading-relaxed text-text-muted sm:text-lg">
+                    Backend- and systems-oriented Computer Science graduate student focused on efficient software, AI/ML, and solving technically interesting problems.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="/programming" class="rounded-xl border border-accent/50 bg-accent/10 px-4 py-2 text-sm font-medium text-accent-soft transition hover:-translate-y-0.5 hover:border-accent hover:bg-accent/20">View projects →</a>
+                <a href="/blog" class="rounded-xl border border-border bg-bg-card px-4 py-2 text-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:text-accent-soft">Read the blog →</a>
+                <a href="https://github.com/ChrisNippert" target="_blank" rel="noopener noreferrer" class="rounded-xl border border-border bg-bg-card px-4 py-2 text-sm transition hover:-translate-y-0.5 hover:border-accent/40 hover:text-accent-soft">GitHub ↗</a>
+            </div>
+        </header>
 
-        <div class="flex flex-wrap gap-2">
-            {["Julia", "Python", "Java", "C", "Go", "React", "Astro"].map(tag => (
-                <span class="rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs text-accent-soft">{tag}</span>
-            ))}
-        </div>
+        <section class="space-y-4">
+            <div class="max-w-2xl">
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent-soft">Current focus</p>
+                <h2 class="mt-1 text-2xl font-semibold">Independent tracks, shared curiosity</h2>
+                <p class="mt-2 text-sm leading-relaxed text-text-muted">I am currently pursuing these as separate research and personal-project threads.</p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+                <article class="ui-card rounded-2xl border border-border bg-bg-card p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent-soft">Research</p>
+                    <h3 class="mt-2 text-lg font-semibold">Data-Driven Prompt Recovery</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-text-muted">Researching how to predict viable inputs from groups of outputs produced by large language models.</p>
+                </article>
+                <article class="ui-card rounded-2xl border border-border bg-bg-card p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent-soft">Personal hardware project</p>
+                    <h3 class="mt-2 text-lg font-semibold">ESP32 Electric Drum Kit</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-text-muted">A first hardware project using piezo-disk drum triggers, a 16-channel multiplexer, an ESP32, and a KiCad circuit design.</p>
+                    <a href="https://github.com/ChrisNippert/EDrumKit" target="_blank" rel="noopener noreferrer" class="mt-3 inline-block text-sm text-accent-soft hover:text-text">View repository ↗</a>
+                </article>
+            </div>
+        </section>
 
-        <div class="text-text-muted max-w-prose space-y-4 text-sm sm:text-base leading-relaxed">
-            <p>
-                I'm a Graduate student at UNH studying Computer Science with interests in AI, ML, and NLP.
-                I also have interest in parallel computing with multithreading, distributed systems, and GPU programming.
-                I have programming skills in many languages including Julia, Python, Java, and C. I've made a bunch
-                of fun side projects in my free time as well.
-            </p>
-            <p>
-                I also write and produce music. I've been drumming for most of my life,
-                and been playing guitar since high school. I challenged myself to make a
-                song every day for the month of December, and continued the
-                tradition for a couple of years. This was enough to get me over my
-                unreasonable goal of a perfect song that was stopping me from
-                releasing music. I am now focusing on more quality than quantity, 
-                getting better at singing and writing interesting and cohesive stories.
-            </p>
-            <p>
-                I have a blog with some thoughts and ideas about various topics.
-            </p>
-        </div>
+        <section class="space-y-5">
+            <div class="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent-soft">Selected work</p>
+                    <h2 class="mt-1 text-2xl font-semibold">Projects worth exploring</h2>
+                </div>
+                <a href="/programming" class="text-sm text-text-muted transition hover:text-accent-soft">All projects →</a>
+            </div>
+            <ul class="grid gap-4 lg:grid-cols-3">
+                {featuredProjects.map((project) => (
+                    <li class="ui-card pointer-glow group relative flex min-h-56 flex-col rounded-2xl border border-border bg-bg-card p-5 transition hover:-translate-y-1 hover:border-accent/40">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h3 class="text-lg font-semibold group-hover:text-accent-soft transition-colors">{project.title}</h3>
+                                {project.labels && (
+                                    <div class="mt-2 flex flex-wrap gap-1.5">
+                                        {project.labels.map((label) => (
+                                            <span class="rounded-full border border-accent/30 bg-accent/10 px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wider text-accent-soft">{label}</span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                            <span class="text-accent-soft" aria-hidden="true">↗</span>
+                        </div>
+                        <p class="mt-3 text-sm leading-relaxed text-text-muted">{project.summary}</p>
+                        {project.stats && (
+                            <dl class="mt-4 grid gap-2 border-t border-border pt-3 text-xs">
+                                {project.stats.map((stat) => (
+                                    <div class="flex items-baseline justify-between gap-3">
+                                        <dt class="uppercase tracking-wider text-text-muted">{stat.label}</dt>
+                                        <dd class="text-right font-medium text-accent-soft">{stat.value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
+                        )}
+                        <div class="mt-auto pt-5 text-xs font-medium uppercase tracking-wider text-accent-soft">Explore project</div>
+                        <a href={`/projects/${project.slug}`} class="absolute inset-0" aria-label={`Explore ${project.title}`} />
+                    </li>
+                ))}
+            </ul>
+        </section>
 
-        <div class="flex flex-wrap gap-3">
-            <a
-                href="/blog"
-                class="inline-block rounded-xl border border-border bg-bg-card px-4 py-2 hover:border-accent/40 hover:text-accent-soft transition-colors duration-200 text-sm sm:text-base"
-            >Read the blog →</a>
-            <a
-                href="/programming"
-                class="inline-block rounded-xl border border-border bg-bg-card px-4 py-2 hover:border-accent/40 hover:text-accent-soft transition-colors duration-200 text-sm sm:text-base"
-            >View projects →</a>
-            <a
-                href="/music"
-                class="inline-block rounded-xl border border-border bg-bg-card px-4 py-2 hover:border-accent/40 hover:text-accent-soft transition-colors duration-200 text-sm sm:text-base"
-            >Listen →</a>
-        </div>
+        <section class="grid gap-8 border-y border-border py-8 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent-soft">Technical focus</p>
+                <h2 class="mt-1 text-2xl font-semibold">How I like to work</h2>
+                <p class="mt-2 max-w-2xl text-sm leading-relaxed text-text-muted">I enjoy collaborative problem-solving: working through constraints, sharing ideas, and building practical, efficient solutions together. I am also proficient with AI tools and AI-assisted development workflows for exploration, iteration, and coding.</p>
+            </div>
+            <div class="flex max-w-xl flex-wrap gap-2 sm:justify-end">
+                {skills.map((skill) => (
+                    <span class="rounded-full border border-accent/25 bg-accent/5 px-3 py-1.5 text-xs text-accent-soft">{skill}</span>
+                ))}
+            </div>
+        </section>
 
-        <hr class="border-border" />
-
-        <div class="space-y-2">
-            <h2 class="text-xs font-semibold uppercase tracking-widest text-text-muted">Live Sites</h2>
+        <section class="space-y-3">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-accent-soft">Live sites</p>
             <ul class="flex flex-wrap gap-3">
                 {liveSites.map(s => (
                     <li>
@@ -77,15 +140,25 @@ const liveSites = [
                             href={s.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="group flex items-center gap-2 rounded-xl border border-border bg-bg-card px-3 py-2 text-sm hover:border-accent/40 transition-colors"
+                            class="ui-card group flex items-center gap-2 rounded-xl border border-border bg-bg-card px-3 py-2 text-sm transition hover:-translate-y-0.5 hover:border-accent/40"
                         >
-                            <span class="h-1.5 w-1.5 rounded-full bg-green-400 shrink-0" aria-hidden="true"></span>
+                            <span class="h-1.5 w-1.5 rounded-full bg-accent shrink-0" aria-hidden="true"></span>
                             <span class="font-medium group-hover:text-accent-soft transition-colors">{s.title}</span>
                             <span class="text-text-muted text-xs hidden sm:inline">— {s.summary}</span>
                         </a>
                     </li>
                 ))}
             </ul>
-        </div>
+        </section>
     </section>
 </Base>
+
+<script>
+    for (const card of document.querySelectorAll<HTMLElement>('.pointer-glow')) {
+        card.addEventListener('pointermove', (event) => {
+            const bounds = card.getBoundingClientRect();
+            card.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
+            card.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
+        });
+    }
+</script>

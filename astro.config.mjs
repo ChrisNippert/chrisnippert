@@ -6,6 +6,9 @@ import rehypeKatex from 'rehype-katex'
 
 export default defineConfig({
     site: 'https://chrisnippert.com',
+    devToolbar: {
+        enabled: false
+    },
     integrations: [
         mdx({
             remarkPlugins: [remarkMath],

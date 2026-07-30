@@ -1,19 +1,23 @@
 ---
 import Base from '@/layouts/Base.astro'
 import Prose from '@/components/Prose.astro'
+import ReadingProgress from '@/components/ReadingProgress.astro'
 import TableOfContents from '@/components/TableOfContents.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, type CollectionEntry } from 'astro:content'
+
+type BlogPost = CollectionEntry<'blog'>
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog')
+  const posts: BlogPost[] = await getCollection('blog')
   return posts.map(p => ({ params: { slug: p.slug }, props: { post: p } }))
 }
-const { post } = Astro.props
+const { post } = Astro.props as { post: BlogPost }
 const { Content } = await post.render()
 ---
 <Base title={`${post.data.title} – Autumn`}>
+  <ReadingProgress />
   <TableOfContents />
-  <article class="mt-4">
+  <article class="article-shell mt-4">
     <header class="mb-6 sm:mb-8">
       <h1 class="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight">{post.data.title}</h1>
       <time class="text-sm text-text-muted mt-2 block">{new Date(post.data.date).toLocaleDateString()}</time>

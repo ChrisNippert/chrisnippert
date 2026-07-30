@@ -38,7 +38,7 @@
 <!-- Mobile TOC Sidebar -->
 <div 
   id="mobile-toc-overlay" 
-  class="fixed inset-0 z-30 xl:hidden opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out"
+  class="mobile-toc-overlay fixed inset-0 z-30 xl:hidden transition-opacity duration-300 ease-in-out"
 >
   <!-- Background overlay -->
   <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
@@ -159,14 +159,9 @@
         const mobileOverlay = document.getElementById('mobile-toc-overlay')
         const mobileSidebar = document.getElementById('mobile-toc-sidebar')
         
-        mobileOverlay?.classList.remove('opacity-100')
-        mobileOverlay?.classList.add('opacity-0')
+        mobileOverlay?.classList.remove('is-open')
         mobileSidebar?.classList.remove('translate-x-0')
         mobileSidebar?.classList.add('-translate-x-full')
-        
-        setTimeout(() => {
-          mobileOverlay?.classList.add('pointer-events-none')
-        }, 300)
       })
       
       container.appendChild(link)
@@ -185,18 +180,12 @@
     const mobileSidebar = document.getElementById('mobile-toc-sidebar')
     const mobileClose = document.getElementById('mobile-toc-close')
     
-    let isOpen = false
-    
     // Open sidebar
     mobileToggle?.addEventListener('click', () => {
-      if (!isOpen) {
-        isOpen = true
-        mobileOverlay?.classList.remove('pointer-events-none')
-        
+      if (!mobileOverlay?.classList.contains('is-open')) {
         // Animate in
         requestAnimationFrame(() => {
-          mobileOverlay?.classList.remove('opacity-0')
-          mobileOverlay?.classList.add('opacity-100')
+          mobileOverlay?.classList.add('is-open')
           mobileSidebar?.classList.remove('-translate-x-full')
           mobileSidebar?.classList.add('translate-x-0')
         })
@@ -205,19 +194,11 @@
     
     // Close sidebar
     const closeSidebar = () => {
-      if (isOpen) {
-        isOpen = false
-        
+      if (mobileOverlay?.classList.contains('is-open')) {
         // Animate out
-        mobileOverlay?.classList.remove('opacity-100')
-        mobileOverlay?.classList.add('opacity-0')
+        mobileOverlay?.classList.remove('is-open')
         mobileSidebar?.classList.remove('translate-x-0')
         mobileSidebar?.classList.add('-translate-x-full')
-        
-        // Remove pointer events after animation
-        setTimeout(() => {
-          mobileOverlay?.classList.add('pointer-events-none')
-        }, 300)
       }
     }
     
@@ -232,7 +213,7 @@
     
     // Close on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape' && mobileOverlay?.classList.contains('is-open')) {
         closeSidebar()
       }
     })
@@ -395,21 +376,13 @@
     
     const observer = new IntersectionObserver((entries) => {
       // Find the topmost visible heading
-      let currentHeading: HTMLHeadingElement | null = null
-      let currentTop = Infinity
+      const visibleHeadings = entries
+        .filter((entry) => entry.isIntersecting && entry.boundingClientRect.top >= 0)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+      const activeHeading = visibleHeadings[0]?.target as HTMLHeadingElement | undefined
       
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const rect = entry.boundingClientRect
-          if (rect.top < currentTop && rect.top >= 0) {
-            currentTop = rect.top
-            currentHeading = entry.target as HTMLHeadingElement
-          }
-        }
-      })
-      
-      if (currentHeading) {
-        const id = currentHeading.id
+      if (activeHeading) {
+        const id = activeHeading.id
         // Remove active class from all links
         links.forEach(link => {
           link.classList.remove('text-accent', 'border-accent', 'font-medium')
@@ -457,13 +430,18 @@
     headings.forEach(heading => observer.observe(heading))
   }
 
-  // Initialize when DOM is loaded
-  document.addEventListener('DOMContentLoaded', () => {
+  const initializeTOC = () => {
     generateTOC()
     setupMainTOCToggle()
     setupMobileTOC()
     highlightCurrentSection()
-  })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeTOC, { once: true })
+  } else {
+    initializeTOC()
+  }
 </script>
 
 <style>

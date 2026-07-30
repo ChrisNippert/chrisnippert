@@ -8,19 +8,19 @@ module.exports = {
     extend: {
       colors: {
         bg: {
-          DEFAULT: '#0B0F14',
-          soft: '#0F1520',
-          card: '#121927'
+              DEFAULT: '#0C1118',
+              soft: '#111923',
+              card: '#151E29'
         },
         text: {
-          DEFAULT: '#E6ECF1',
-          muted: '#B7C2CC'
+              DEFAULT: '#EEF3F9',
+              muted: '#AAB7C7'
         },
         accent: {
-          DEFAULT: '#7C6FF4',
-          soft: '#A3BFFA'
+              DEFAULT: '#7FA6E8',
+              soft: '#B6CDF8'
         },
-        border: 'rgba(163,191,250,0.12)'
+            border: 'rgba(182,205,248,0.16)'
       }
     }
   },

@@ -1,0 +1,21 @@
+<div class="fixed inset-x-0 top-14 z-40 h-px bg-transparent" aria-hidden="true">
+  <div id="reading-progress" class="h-full origin-left scale-x-0 bg-accent shadow-[0_0_10px_theme(colors.accent.DEFAULT)]"></div>
+</div>
+
+<script>
+  const progress = document.getElementById('reading-progress')
+  const article = document.querySelector('article')
+
+  const updateProgress = () => {
+    if (!progress || !article) return
+
+    const articleTop = article.getBoundingClientRect().top + window.scrollY
+    const readableHeight = Math.max(article.offsetHeight - window.innerHeight * 0.65, 1)
+    const value = Math.min(Math.max((window.scrollY - articleTop) / readableHeight, 0), 1)
+    progress.style.transform = `scaleX(${value})`
+  }
+
+  updateProgress()
+  window.addEventListener('scroll', updateProgress, { passive: true })
+  window.addEventListener('resize', updateProgress)
+</script>
